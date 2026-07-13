@@ -21,11 +21,46 @@ if uploaded is None:
     st.stop()
 
 # -----------------------
-# 데이터 읽기
+# 데이터 읽기 (인코딩 자동 처리)
 # -----------------------
 
-if uploaded.name.endswith("csv"):
-    df = pd.read_csv(uploaded)
+if uploaded.name.endswith(".csv"):
+
+    df = None
+
+    encodings = [
+        "utf-8",
+        "utf-8-sig",
+        "cp949",
+        "euc-kr"
+    ]
+
+    separators = [
+        ",",
+        ";",
+        "\t"
+    ]
+
+    for enc in encodings:
+        for sep in separators:
+            try:
+                uploaded.seek(0)
+                df = pd.read_csv(
+                    uploaded,
+                    encoding=enc,
+                    sep=sep
+                )
+                break
+            except:
+                continue
+
+        if df is not None:
+            break
+
+    if df is None:
+        st.error("CSV 파일을 읽을 수 없습니다.")
+        st.stop()
+
 else:
     df = pd.read_excel(uploaded)
 
@@ -116,7 +151,7 @@ layer = pdk.Layer(
     data=map_df,
     get_position="[경도, 위도]",
     get_radius=50,
-    get_fill_color=[255,0,0,160],
+    get_fill_color=[255, 0, 0, 160],
     pickable=True,
 )
 
@@ -131,7 +166,9 @@ tooltip = {
     "<b>{주차장명}</b><br/>"
     "{주소}<br/>"
     "주차면수 : {주차면수}",
-    "style":{"backgroundColor":"steelblue"}
+    "style": {
+        "backgroundColor": "steelblue"
+    }
 }
 
 st.pydeck_chart(
@@ -146,7 +183,7 @@ st.pydeck_chart(
 # Plotly
 # -----------------------
 
-left,right = st.columns(2)
+left, right = st.columns(2)
 
 with left:
 

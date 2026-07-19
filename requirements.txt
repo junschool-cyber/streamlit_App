@@ -1,6 +1,6 @@
 streamlit
-yfinance
-plotly
 pandas
-numpy
+plotly
+matplotlib>=3.8
+wordcloud
 google-api-python-client

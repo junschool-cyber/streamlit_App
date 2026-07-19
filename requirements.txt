@@ -1,6 +1,6 @@
 streamlit
 pandas
 plotly
-matplotlib>=3.8
-wordcloud
 google-api-python-client
+matplotlib
+wordcloud

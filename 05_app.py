@@ -7,7 +7,7 @@ st.set_page_config(page_title="🎲 여행 룰렛", page_icon="🎲")
 st.title("🎲 국내 여행 룰렛")
 st.write("버튼을 눌러 랜덤 여행지를 추천받아 보세요!")
 
-API_KEY = st.secrets["TOUR_API_KEY"]
+API_KEY = st.secrets["2de74b9ba4e5495f2e373ebf99ca0f8732e82a4998a091f1c7120a2c620e035f"]
 
 @st.cache_data
 def get_places():

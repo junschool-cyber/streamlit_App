@@ -4,3 +4,5 @@ plotly
 google-api-python-client
 matplotlib
 wordcloud
+requests
+openai
